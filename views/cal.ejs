@@ -1,0 +1,84 @@
+<html>
+<head>
+<link rel='stylesheet' href='/stylesheets/style.css' />
+<link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript">
+
+function AjaxPostCall(){
+
+	
+var num1= Number(document.getElementById("num1").value);
+var num2=Number(document.getElementById("num2").value);
+var button=document.getElementById("button").value;
+
+$.ajax({
+
+url: "/add",
+datatype : "JSON",
+data : {"num1": num1,"num2" : num2, "button" : button},
+type: "GET",
+
+success: function(sum){
+document.getElementById("result").innerHTML = sum;
+},
+error: function(){
+
+alert("error");
+}
+
+
+});
+
+}
+</script>
+
+<style>
+div{
+
+background-color: lightgrey;
+width: 100px;
+height: 460px;
+padding: 25px;
+border: 25px solid navy;
+margin: 25px;
+}
+</style>
+</head>
+<body>
+<BR>
+<center>
+<div class="container">
+<h1>Calculator</h1>
+
+<form action="/add" method="get">
+
+<h3>Enter first number:</h3>
+
+<input type="text" id="num1" name="num1" placeholder="Enter first number" value="<%= typeof num1!='undefined' ? num1 : '' %>" >
+<!--<input type="text" id="num1" name="num1" placeholder="Enter first number">-->
+
+
+<h3>Enter second number:</h3>
+
+<input type="text" id="num2" name="num2" placeholder="Enter second number" value="<%= typeof num2!='undefined' ? num2 : '' %>" >
+<!--<input type="text" id="num2" name="num2" placeholder="Enter second number">-->
+
+<BR>
+<BR>
+
+<button type="submit" id="add" name="button" value="add" class="btn btn-info btn-lg" >+</button>&nbsp;
+<button type="submit" id="sub" name="button" value="sub" class="btn btn-info btn-lg" >-</button>&nbsp;
+<button type="submit" id="sub" name="button" value="mult" class="btn btn-info btn-lg">*</button>&nbsp;
+<button type="submit" id="sub" name="button" value="div" class="btn btn-info btn-lg">/</button>&nbsp;
+<button type="submit" id="sub" name="button" value="clear" class="btn btn-info btn-lg">Clear</button>
+</form>
+<!--<p id="result"><h3></h3></p>-->
+<p><h3><%= typeof op!='undefined' ? op : '' %></h3></p>
+<p><h3><%= typeof sum!='undefined' ? sum : '' %></h3></p>
+
+</div></center>
+</body>
+</html>
